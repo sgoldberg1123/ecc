@@ -1,5 +1,6 @@
-#include <stdlib.c>
-#include <math.c>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 
 int main() {
