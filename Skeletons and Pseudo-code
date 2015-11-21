@@ -1,0 +1,44 @@
+This file in intended to be sort of a To-do file, as well as hold some Pseudocode.
+
+Need code for/to implement:
+-x-BigInt/similar large number library.
+-x-Curve and finite field
+-x-Pull a point from the Curve
+-x-Adding two points
+-x-Getting X and Y coordinates of a point
+-x-Getting a Generator of the curve (Any point? Since under Prime modulus?)
+-x-Adding a point to itself with fast exponentiation.
+
+
+
+-Adding two Points-
+BigInt l = 0; //Lambda
+BigInt xp = 0;
+BigInt yp = 0;
+BigInt xq = 0;
+BigInt yq = 0;
+BigInt xr = 0;
+BigInt yr = 0;
+
+P+Q=R
+
+//Lambda = (y(q)-y(p))/(x(q)-x(p))
+l = (yq-yp)/(xq-xp)
+//X(r)=Lambda^2 + x(p) - x(q)
+xr = (l^2) + xp - xq;
+//Y(r)=Lambda[x(p)-x(r)]-y(p)
+yr = l(xp-xr)-yp
+
+
+-Point doubling-
+//xd = x of 2P
+//yd = x of 2P
+//Lambda = 3x(p)^2/2y(p)
+l = 3xp/2yp
+//X(r)=Lambda^2 + x(p)
+xd = (l^2) + xp;
+//Y(r)=Lambda[x(p)]-y(p)
+yd = l(xp)-yp
+
+
+
