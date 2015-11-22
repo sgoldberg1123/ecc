@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int pointAdder(){
-
+int pointAdder(void){
+	return 0;
 }
