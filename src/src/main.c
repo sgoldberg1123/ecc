@@ -43,7 +43,7 @@ int getY() {
 int getGenerator() {
 	//Generate a point that generates the curve.
 	////Does any point work? If not, what qualities does
-	////the point need?
+	////the point need?mgfkfj
 	return 0;
 }
 int fastExponentiation() {
