@@ -55,7 +55,7 @@ int dhecc(/**/) {
 	//InfInt gLK = gK * ll; //These'll probably use Fast exponentiation
 
 	////Bob then adds M + KLg and sends it to Sarah
-	//int gKLm = m + gKL;
+	//InfInt gKLm = m + gKL;
 
 	////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
 	//int n = gKLm - gLK;
@@ -68,20 +68,20 @@ int dhecc(/**/) {
 }
 
 
-int pointDoubler(int x, int y) {
+InfInt pointDoubler(int x, int y) {
 	//This should be just the equation for doubling a point.
 
-	int l = 0; //Lambda
-	int xp = 0;
-	int yp = 0;
+	InfInt l = 0; //Lambda
+	InfInt xp = 0;
+	InfInt yp = 0;
 	int a = 0; //?
 	
 	//Lambda = 3x(p)^2+a/2y(p)
-	l = (3 * (xp ^ 2) + a) / (2*yp);
+	l = (((xp*xp)*3 )+ a) / (yp*2);
 	//X(r)=Lambda^2 + x(p)
-	int xd = (l ^ 2) + xp;
+	InfInt xd = (l*l) + xp;
 	//Y(r)=Lambda[x(p)]-y(p)
-	int yd = (l*xp) - yp;
+	InfInt yd = (l*xp) - yp;
 
 
 	return xp;//change to one point, may have to invent Point for InfInt?
