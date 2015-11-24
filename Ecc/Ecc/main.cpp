@@ -70,7 +70,7 @@ int pointDoubler(int x, int y) {
 	int a = 0; //?
 	
 	//Lambda = 3x(p)^2+a/2y(p)
-	l = (3 * (xp ^ 2) + a) / (2yp);
+	l = (3 * (xp ^ 2) + a) / (2*yp);
 	//X(r)=Lambda^2 + x(p)
 	int xd = (l ^ 2) + xp;
 	//Y(r)=Lambda[x(p)]-y(p)
@@ -98,7 +98,7 @@ int getGenerator() {
 	return 0;
 }
 
-int fastExponentiation(int mPlier; int g;) {
+int fastExponentiation(int mPlier, int g) {
 	//Multiply a big number fast. Like,
 	//Given 100g, break up the coefficient
 	//into binary, then multiply that by g?
@@ -107,7 +107,7 @@ int fastExponentiation(int mPlier; int g;) {
 	int pp = 7;
 	stack <bool> bin;
 
-	if (mPlier=<255) { //Limit of 255? (2^7) //in progress
+	if (mPlier<=255) { //Limit of 255? (2^7) //in progress
 		do
 		{
 			if ((mPlier - (2 ^ pp))>=0) {
@@ -115,7 +115,7 @@ int fastExponentiation(int mPlier; int g;) {
 				pp--;
 				bin.push(1);
 			}
-			else if(remainder = 0 && pp>0){
+			else if(remainder = 0 && pp>0) {
 				
 			}
 
