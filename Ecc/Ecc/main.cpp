@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <cmath>
+#include <stack>
 
 
 using namespace std;
@@ -97,11 +98,33 @@ int getGenerator() {
 	return 0;
 }
 
-int fastExponentiation() {
+int fastExponentiation(int mPlier; int g;) {
 	//Multiply a big number fast. Like,
 	//Given 100g, break up the coefficient
 	//into binary, then multiply that by g?
-	//Note: need a little more research on topic.hkl
+	//Note: need a little more research on topic.
+	int remainder = 0;
+	int pp = 7;
+	stack <bool> bin;
+
+	if (mPlier=<255) { //Limit of 255? (2^7) //in progress
+		do
+		{
+			if ((mPlier - (2 ^ pp))>=0) {
+				mPlier = mPlier - (2 ^ pp);
+				pp--;
+				bin.push(1);
+			}
+			else if(remainder = 0 && pp>0){
+				
+			}
+
+		} while (remainder != 0);
+	}
+	else {
+		printf("Error: Multiplier too big (<255)");
+	}
+
 	return 0;
 }
 
