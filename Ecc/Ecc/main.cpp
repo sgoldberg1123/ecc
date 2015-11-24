@@ -412,7 +412,7 @@ int fastExponentiation() {
 	//Multiply a big number fast. Like,
 	//Given 100g, break up the coefficient
 	//into binary, then multiply that by g?
-	//Note: need a little more research on topic.
+	//Note: need a little more research on topic.hkl
 	return 0;
 }
 
