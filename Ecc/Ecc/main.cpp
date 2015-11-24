@@ -1,19 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 
-int dhecc();
-int pointDoubler();
-int getX();
-int getY();
-int getGenerator();
-int fastExponentiation();
-//function for curve? or will curve be absract with its
-////pieces spread though the code?
+
 
 int main() {
 
+	
 
+	system("pause");
 	return 0;
 }
 
@@ -33,16 +28,19 @@ int getX() {
 	//Given a point, get X?
 	return 0;
 }
+
 int getY() {
 	//Given a point, get Y?
 	return 0;
 }
+
 int getGenerator() {
 	//Generate a point that generates the curve.
 	////Does any point work? If not, what qualities does
 	////the point need?
 	return 0;
 }
+
 int fastExponentiation() {
 	//Multiply a big number fast. Like,
 	//Given 100g, break up the coefficient
@@ -51,6 +49,9 @@ int fastExponentiation() {
 	return 0;
 }
 
+int curve(int a, int b) {
+	//Y^2 = ?
+}
 
 
 
