@@ -11,11 +11,12 @@
 
 #include "Infint.h"
 
-
 using namespace std;
 
 
 int fastExponentiation(int mPlier, int g);
+InfInt getPoint(int x);
+#define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
 
@@ -24,9 +25,31 @@ int main() {
 
 	InfInt p = "1267650600228229401496703205653";
 
+
+	//TEST PROMPT for getting a random point
+	int x = rand();
+	cout << (x) << endl;
+	InfInt y;
+	int i = 0;
+	/*cout << ("Please enter an x: ");
+	cin >> (x);*/
+	cout << endl;
+	while (i = 0) {
+		y = getPoint(x);
+		if ((y % 1) == 0) {
+			i++;
+		}
+		else {
+			x = rand();
+			cout << (x) << endl;
+		}
+	}
+	cout << y;
+	cout << endl << endl;
+
 	//cout << (255 - (pow(2, 7)));
 
-	fastExponentiation(250, 0); //works, but finishing need work.
+	//fastExponentiation(250, 0); //works, but finishing need work.
 
 
 	////Demos
@@ -36,7 +59,7 @@ int main() {
 	//Fast exponentiation
 	//DHECC!!!
 
-	system("pause");
+	//system("pause");
 	return 0;
 }
 
@@ -121,6 +144,14 @@ InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2) {
 	return 0;
 }
 
+InfInt getPoint(int x) {
+	//if mod 1 = 0
+	int xT = pow(x, 3) + x + 24;
+	InfInt xTT = xT;
+	InfInt y = xTT.InfInt::intSqrt();
+
+	return y;
+}
 int getGenerator() {
 	//Generate a point that generates the curve.
 	////Does any point work? If not, what qualities does
