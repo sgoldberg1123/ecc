@@ -39,7 +39,7 @@ int dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
 
 	////Bob and Sarah each have g,(a value on the curve?), and their own key, K and L respectively. //?
-	/** BigInt g = getGenerater(); //?
+	/** InfInt g = getGenerater(); //?
 	 *  Int kk = rand();//?
 	 *  Int ll = rand();//?
 	 */
@@ -47,12 +47,12 @@ int dhecc(/**/) {
 	int m = 8;
 
 	////Bob sends Sarah Kg, and Sarah sends back Lg
-	//Bigint gK = kk * g; //These'll probably use Fast exponentiation
-	//Bigint gL = ll * g; //These'll probably use Fast exponentiation
+	//Infint gK = kk * g; //These'll probably use Fast exponentiation
+	//InfInt gL = ll * g; //These'll probably use Fast exponentiation
 
 	////Bob multiplies (K)Lg and Sarah multiplies (L)Kg
-	//Bigint gKL = gL * kk; //These'll probably use Fast exponentiation
-	//Bigint gLK = gK * ll; //These'll probably use Fast exponentiation
+	//InfInt gKL = gL * kk; //These'll probably use Fast exponentiation
+	//InfInt gLK = gK * ll; //These'll probably use Fast exponentiation
 
 	////Bob then adds M + KLg and sends it to Sarah
 	//int gKLm = m + gKL;
@@ -84,7 +84,7 @@ int pointDoubler(int x, int y) {
 	int yd = (l*xp) - yp;
 
 
-	return xp;//change to one point, may have to invent Point for bigint?
+	return xp;//change to one point, may have to invent Point for InfInt?
 	return yp;//change to one point, or maybe Point using pointers?
 }
 
