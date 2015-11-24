@@ -1,3 +1,5 @@
+#define INFINF_USE_EXCEPTIONS
+
 #include <iostream>
 #include <cstdio>
 #include <vector>
@@ -7,6 +9,8 @@
 #include <cmath>
 #include <stack>
 
+#include "Infint.h"
+
 
 using namespace std;
 
@@ -15,6 +19,9 @@ using namespace std;
 int main() {
 
 	printf("Hello World!");
+
+	InfInt p = "1267650600228229401496703205653";
+
 
 	////Demos
 	//Getting X and Y coordinates of a point
