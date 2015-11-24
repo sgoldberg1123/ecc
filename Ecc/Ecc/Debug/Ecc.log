@@ -1,8 +1,9 @@
-﻿Build started 11/24/2015 12:09:52 PM.
+﻿Build started 11/24/2015 2:07:15 PM.
      1>Project "D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Ecc\Ecc.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(144): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.lib" /MACHINE:X86 Debug\main.obj
          Ecc.vcxproj -> D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe
@@ -10,4 +11,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.10
+Time Elapsed 00:00:01.62

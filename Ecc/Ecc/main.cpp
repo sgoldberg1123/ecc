@@ -15,12 +15,18 @@
 using namespace std;
 
 
+int fastExponentiation(int mPlier, int g);
 
 int main() {
 
 	printf("Hello World!");
+	cout << endl;
 
 	InfInt p = "1267650600228229401496703205653";
+
+	//cout << (255 - (pow(2, 7)));
+
+	fastExponentiation(250, 0); //works, but finishing need work.
 
 
 	////Demos
@@ -37,6 +43,9 @@ int main() {
 
 int dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
+
+	////this may be wrong as is, I believe I must change it such that 
+	////g is different? Must research.
 
 	////Bob and Sarah each have g,(a value on the curve?), and their own key, K and L respectively. //?
 	/** InfInt g = getGenerater(); //?
@@ -68,33 +77,47 @@ int dhecc(/**/) {
 }
 
 
-InfInt pointDoubler(int x, int y) {
+InfInt pointDoubler(InfInt x, InfInt y, char call) {
 	//This should be just the equation for doubling a point.
 
 	InfInt l = 0; //Lambda
-	InfInt xp = 0;
-	InfInt yp = 0;
-	int a = 0; //?
+	int a = 24; //?
 	
 	//Lambda = 3x(p)^2+a/2y(p)
-	l = (((xp*xp)*3 )+ a) / (yp*2);
+	l = (((x*x)*3 )+ a) / (y*2);
 	//X(r)=Lambda^2 + x(p)
-	InfInt xd = (l*l) + xp;
+	InfInt xd = (l*l) + x;
 	//Y(r)=Lambda[x(p)]-y(p)
-	InfInt yd = (l*xp) - yp;
+	InfInt yd = (l*x) - y;
 
-
-	return xp;//change to one point, may have to invent Point for InfInt?
-	return yp;//change to one point, or maybe Point using pointers?
+	if (call == 'x') { // if error try = //?
+		return xd;
+	}
+	else if (call == 'y') { // if error try = //?
+		return yd;
+	}
+	else {
+		return 0;
+	}
 }
 
-int getX() {
+InfInt getX(InfInt y) {
 	//Given a point, get X?
+
+
+	//return x;
 	return 0;
 }
 
-int getY() {
+InfInt getY(InfInt x) {
 	//Given a point, get Y?
+	//return y;
+	return 0;
+}
+
+InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2) {
+	//Adding two points together to get a new point?
+
 	return 0;
 }
 
@@ -112,18 +135,21 @@ int fastExponentiation(int mPlier, int g) {
 	//Note: need a little more research on topic.
 	int remainder = 0;
 	int pp = 7;
-	stack <bool> bin;
+	stack<int> bin = {};
 
-	if (mPlier<=255) { //Limit of 255? (2^7) //in progress
+	if (mPlier<256) { //Limit of 255? (2^7) //in progress
 		do
 		{
-			if ((mPlier - (2 ^ pp))>=0) {
-				mPlier = mPlier - (2 ^ pp);
+			if ((mPlier - (pow(2, pp)))>=0) {
+				mPlier = mPlier - (pow(2,pp));
+				remainder = mPlier;
 				pp--;
 				bin.push(1);
 			}
 			else if(remainder = 0 && pp>0) {
-				
+				for (pp;pp > 0;pp--) {
+					bin.push(0);
+				}
 			}
 
 		} while (remainder != 0);
@@ -131,6 +157,18 @@ int fastExponentiation(int mPlier, int g) {
 	else {
 		printf("Error: Multiplier too big (<255)");
 	}
+
+	for (pp;pp > 0;pp--) {
+		bin.push(0);
+	}
+	
+	for (int ii = 7;ii >= 0;ii--) {
+		int qq = bin.top();
+		bin.pop();
+		cout << qq;
+	}
+
+	//multiply g by bin
 
 	return 0;
 }
