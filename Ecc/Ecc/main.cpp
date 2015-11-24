@@ -6,7 +6,7 @@
 
 int main() {
 
-	
+	t
 
 	system("pause");
 	return 0;
