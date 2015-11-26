@@ -24,7 +24,9 @@ int main() {
 	cout << endl;
 
 	InfInt p = "1267650600228229401496703205653";
-
+	
+	//create the seed we need for "true" random x's
+	srand(time(NULL));
 
 	//TEST PROMPT for getting a random point
 	int x = rand();
@@ -40,6 +42,7 @@ int main() {
 			i++;
 		}
 		else {
+			cout << ("Failed!") << endl;
 			x = rand();
 			cout << (x) << endl;
 		}
@@ -146,9 +149,9 @@ InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2) {
 
 InfInt getPoint(int x) {
 	//if mod 1 = 0
-	int xT = pow(x, 3) + x + 24;
-	InfInt xTT = xT;
-	InfInt y = xTT.InfInt::intSqrt();
+	int xx = pow(x, 3) + x + 24;
+	InfInt xxx = xx;
+	InfInt y = xxx.InfInt::intSqrt();
 
 	return y;
 }
