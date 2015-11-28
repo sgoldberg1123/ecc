@@ -20,9 +20,6 @@ InfInt getPoint(int x);
 
 int main() {
 
-	printf("Hello World!");
-	cout << endl;
-
 	InfInt p = "1267650600228229401496703205653";
 	
 	//create the seed we need for "true" random x's
@@ -30,25 +27,24 @@ int main() {
 
 	//TEST PROMPT for getting a random point
 	int x = rand();
-	cout << (x) << endl;
+	cout << ("Given x: ") << (x) << endl <<endl;
 	InfInt y;
 	int i = 0;
-	/*cout << ("Please enter an x: ");
-	cin >> (x);*/
-	cout << endl;
-	while (i = 0) {
+	
+	//TEST to get an exact point, not a decimal value
+	while (i == 0) {
 		y = getPoint(x);
-		if ((y % 1) == 0) {
-			i++;
-		}
-		else {
+		if (y == NULL) {
 			cout << ("Failed!") << endl;
 			x = rand();
-			cout << (x) << endl;
+			cout << ("Next Attempt at x :") << (x) << endl;
+		}
+		else {
+			cout << ("Success!") << endl;
+			cout << ("Our point is: (") << (x) << (",") << (y) << (")") << endl;
+			i++;
 		}
 	}
-	cout << y;
-	cout << endl << endl;
 
 	//cout << (255 - (pow(2, 7)));
 
@@ -148,10 +144,20 @@ InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2) {
 }
 
 InfInt getPoint(int x) {
-	//if mod 1 = 0
-	int xx = pow(x, 3) + x + 24;
-	InfInt xxx = xx;
-	InfInt y = xxx.InfInt::intSqrt();
+	
+	InfInt y;
+	double xx = pow(x, 3) + x + 24;
+
+	xx = sqrt(xx);
+	cout << (xx) << endl;
+	if (fmod(xx,1) == 0) {
+		y = (int)xx;
+	}
+	else {
+		cout << ("Failed!"); 
+		y = NULL;
+	}
+	//InfInt y = xxx.InfInt::intSqrt();
 
 	return y;
 }
