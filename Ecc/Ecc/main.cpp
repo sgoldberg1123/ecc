@@ -17,6 +17,7 @@ using namespace std;
 int fastExponentiation(int mPlier, int g);
 InfInt getPoint(int x);
 InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component);
+InfInt getY(InfInt x);
 #define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
@@ -46,6 +47,14 @@ int main() {
 
 		cout << endl << ("Point x3: ") << (x3) << endl << ("Point y3: ") << (y3) << endl;
 	*/
+
+	//getY() TEST------------------------------------------------------------------------
+	/*InfInt testX = 4, w;
+	w = getY(testX);
+
+	cout << ("OUR NEW POINT: ") << (testX) << (",") << (w) << endl;
+	*/
+
 	//cout << (255 - (pow(2, 7)));
 
 	//fastExponentiation(250, 0); //works, but finishing need work.
@@ -123,18 +132,28 @@ InfInt pointDoubler(InfInt x, InfInt y, char call) {
 	}
 }
 
-InfInt getX(InfInt y) {
-	//Given a point, get X?
+/*
+ * Given component y, get x;
+ */
+double getX(int y) {
 
-
-	//return x;
-	return 0;
+	double x;
+	x = 0;
+	return x;
 }
 
+/*
+* Given component x, get y;
+*/
 InfInt getY(InfInt x) {
-	//Given a point, get Y?
-	//return y;
-	return 0;
+
+	InfInt y;
+
+	y = (x*x*x) + x + 24;
+
+	y = y.InfInt::intSqrt();
+
+	return y;
 }
 
 /* 
