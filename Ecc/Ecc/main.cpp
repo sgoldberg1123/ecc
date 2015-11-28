@@ -16,12 +16,16 @@ using namespace std;
 
 int fastExponentiation(int mPlier, int g);
 InfInt getPoint(int x);
+InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component);
 #define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
 
 	InfInt p = "1267650600228229401496703205653";
-	
+	InfInt x3, y3;
+	InfInt x1 = 5, y1 = 4, x2 = 7, y2 = 12;
+	char xComponent = 'x', yComponent = 'y';
+
 	//create the seed we need for "true" random x's
 	srand(time(NULL));
 
@@ -29,23 +33,19 @@ int main() {
 	int x = rand();
 	cout << ("Given x: ") << (x) << endl <<endl;
 	InfInt y;
-	int i = 0;
 	
 	//TEST to get an exact point, not a decimal value
-	while (i == 0) {
-		y = getPoint(x);
-		if (y == NULL) {
-			cout << ("Failed!") << endl;
-			x = rand();
-			cout << ("Next Attempt at x :") << (x) << endl;
-		}
-		else {
-			cout << ("Success!") << endl;
-			cout << ("Our point is: (") << (x) << (",") << (y) << (")") << endl;
-			i++;
-		}
-	}
 
+		y = getPoint(x);
+		cout << ("Our point is: (") << (x) << (",") << (y) << (")") << endl;
+
+	//POINT ADDER TEST-------------------------------------------------------------------
+	/*	cout << endl << endl << ("POINT ADDER TEST") << endl;
+		x3 = pointAdder(x1, y1, x2, y2, xComponent);
+		y3 = pointAdder(x1, y1, x2, y2, yComponent);
+
+		cout << endl << ("Point x3: ") << (x3) << endl << ("Point y3: ") << (y3) << endl;
+	*/
 	//cout << (255 - (pow(2, 7)));
 
 	//fastExponentiation(250, 0); //works, but finishing need work.
@@ -137,29 +137,43 @@ InfInt getY(InfInt x) {
 	return 0;
 }
 
-InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2) {
-	//Adding two points together to get a new point?
+/* 
+ * Adds two points together component wise to get a new component for given point
+*/
+InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component) {
+	InfInt x3, y3;
 
-	return 0;
+	x3 = x1 + x2;
+	y3 = y1 + y2;
+
+	if (component == 'x') {
+		return x3;
+	}
+	else if (component == 'y') {
+		return y3;
+	}
+	else {
+		cout << ("ERROR: Only use x or y for component request");
+		return 0;
+	}
 }
 
 InfInt getPoint(int x) {
-	
-	InfInt y;
+
 	double xx = pow(x, 3) + x + 24;
 
 	xx = sqrt(xx);
 	cout << (xx) << endl;
-	if (fmod(xx,1) == 0) {
-		y = (int)xx;
-	}
-	else {
-		cout << ("Failed!"); 
-		y = NULL;
-	}
-	//InfInt y = xxx.InfInt::intSqrt();
+	//if (xx == int(xx)) {
+	//	y = int(xx);
 
-	return y;
+	//} else {
+	//	cout << ("Failed!");
+	//		y = NULL;
+	//}
+	//InfInt y = xxx.InfInt::intSqrt();
+	long long y = xx;
+	return InfInt(y);
 }
 int getGenerator() {
 	//Generate a point that generates the curve.
