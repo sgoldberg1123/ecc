@@ -208,49 +208,49 @@ int getGenerator() {
 	return 0;
 }
 
-int fastExponentiation(int mPlier, int g) {
+InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 	//Multiply a big number fast. Like,
-	//Given 100g, break up the coefficient
-	//into binary, then multiply that by g?
-	//Note: need a little more research on topic.
-	int remainder = 0;
-	int pp = 7;
-	stack<int> bin = {};
 
-	if (mPlier<256) { //Limit of 255? (2^7) //in progress
-		do
-		{
-			if ((mPlier - (pow(2, pp)))>=0) {
-				mPlier = mPlier - (pow(2,pp));
-				remainder = mPlier;
-				pp--;
-				bin.push(1);
-			}
-			else if(remainder = 0 && pp>0) {
-				for (pp;pp > 0;pp--) {
-					bin.push(0);
-				}
-			}
-
-		} while (remainder != 0);
-	}
-	else {
-		printf("Error: Multiplier too big (<255)");
+	int nn = mPlier;
+	string bin;
+	char holder = ' ';
+	while (nn != 0) {
+		holder = nn % 2 + '0';
+		bin = holder + bin;
+		nn /= 2;
 	}
 
-	for (pp;pp > 0;pp--) {
-		bin.push(0);
-	}
-	
-	for (int ii = 7;ii >= 0;ii--) {
-		int qq = bin.top();
-		bin.pop();
-		cout << qq;
-	}
+	//Prints binary
+	//cout << bin << endl;
 
 	//multiply g by bin
+	int cc = bin.length();
+	int ii = 0;
+	InfInt resultX;
+	InfInt resultY;
 
-	return 0;
+	for (cc;cc > 0;cc--) {
+		if (bin.at(ii) == '1') {
+			//cout << cc << endl;
+			//Multiply g by 2^(c-1), add to result.
+
+			//This is technically the slow version of point adding, 
+			//is like: gX^cc + gX^cc + ...
+			//needs : cc*g + cc*g+...
+			resultX = resultX + (gX * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
+			resultX = resultX % prime;
+			resultY = resultY + (gY * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
+			resultY = resultY % prime;
+		}
+		else if (bin.at(ii) == '0') {
+			//cout << "zero/" << endl;
+			//nothing
+		}
+
+		ii++;
+	}
+
+	return resultX, resultY; //How return point?
 }
 
 void curve() {//maybe turn this into a funtion that given input returns x, y, a, b, etc?
