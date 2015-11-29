@@ -1,3 +1,10 @@
+/* 
+   ELLIPTIC CURVE CRYPTOGRAPHY PROJECT
+   FOR MATH 370 with Seth Dutter
+   Project completed by Sam Goldberg and Sam Goers 
+   11/30/15
+*/
+
 #define INFINF_USE_EXCEPTIONS
 
 #include <iostream>
@@ -8,11 +15,9 @@
 #include <iomanip>
 #include <cmath>
 #include <stack>
-
 #include "Infint.h"
 
 using namespace std;
-
 
 int fastExponentiation(int mPlier, int g);
 InfInt getPoint(int x);
@@ -67,11 +72,12 @@ int main() {
 	//Fast exponentiation
 	//DHECC!!!
 
-	//system("pause");
 	return 0;
 }
 
-
+/*
+ * Function to run all operations for Diffie-Hellman's Elliptic Curve cryptography simulation
+*/
 int dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
 
@@ -107,9 +113,10 @@ int dhecc(/**/) {
 	return n;
 }
 
-
+/*
+ * Equation used to double a point with the given components.
+ */
 InfInt pointDoubler(InfInt x, InfInt y, char call) {
-	//This should be just the equation for doubling a point.
 
 	InfInt l = 0; //Lambda
 	int a = 24; //?
@@ -135,6 +142,7 @@ InfInt pointDoubler(InfInt x, InfInt y, char call) {
 /*
  * Given component y, get x;
  */
+/*
 InfInt getX(InfInt y) {
 
 	InfInt u,v,w,x;
@@ -148,10 +156,11 @@ InfInt getX(InfInt y) {
 
 	return x;
 }
+*/
 
 /*
-* Given component x, get y;
-*/
+ * Given component x, get y;
+ */
 InfInt getY(InfInt x) {
 
 	InfInt y;
@@ -165,7 +174,7 @@ InfInt getY(InfInt x) {
 
 /* 
  * Adds two points together component wise to get a new component for given point
-*/
+ */
 InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component) {
 	InfInt x3, y3;
 
@@ -184,12 +193,14 @@ InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component) {
 	}
 }
 
+/*
+ * Given our x obtain our point on the curve
+*/
 InfInt getPoint(int x) {
 
 	double xx = pow(x, 3) + x + 24;
-
 	xx = sqrt(xx);
-	cout << (xx) << endl;
+
 	//if (xx == int(xx)) {
 	//	y = int(xx);
 
@@ -208,8 +219,10 @@ int getGenerator() {
 	return 0;
 }
 
+/*
+ * Application of fast exponentiation in order to multiply a very big number very quickly
+ */
 InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
-	//Multiply a big number fast. Like,
 
 	int nn = mPlier;
 	string bin;
@@ -238,9 +251,9 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 			//is like: gX^cc + gX^cc + ...
 			//needs : cc*g + cc*g+...
 			resultX = resultX + (gX * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
-			resultX = resultX % prime;
+			//resultX = resultX % prime;
 			resultY = resultY + (gY * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
-			resultY = resultY % prime;
+			//resultY = resultY % prime;
 		}
 		else if (bin.at(ii) == '0') {
 			//cout << "zero/" << endl;

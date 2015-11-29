@@ -1,4 +1,4 @@
-﻿Build started 11/28/2015 5:59:00 PM.
+﻿Build started 11/29/2015 5:04:25 PM.
      1>Project "D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Ecc\Ecc.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\Visual Studio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
@@ -6,22 +6,15 @@
      1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(21): warning C4005: 'RAND_MAX': macro redefinition
          c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdlib.h(339): note: see previous definition of 'RAND_MAX'
      1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(31): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(143): error C2665: 'pow': none of the 6 overloads could convert all the argument types
-         d:\visual studio\vc\include\cmath(574): note: could be 'long double pow(long double,int) noexcept'
-         d:\visual studio\vc\include\cmath(568): note: or       'long double pow(long double,long double) noexcept'
-         d:\visual studio\vc\include\cmath(269): note: or       'float pow(float,int) noexcept'
-         d:\visual studio\vc\include\cmath(263): note: or       'float pow(float,float) noexcept'
-         d:\visual studio\vc\include\cmath(40): note: or       'double pow(double,int) noexcept'
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\math.h(470): note: or       'double pow(double,double)'
-         d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(143): note: while trying to match the argument list '(InfInt, int)'
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(144): error C2440: 'type cast': cannot convert from 'double' to 'InfInt'
-         d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(144): note: No constructor could take the source type, or constructor overload resolution was ambiguous
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(145): error C2440: 'type cast': cannot convert from 'double' to 'InfInt'
-         d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(145): note: No constructor could take the source type, or constructor overload resolution was ambiguous
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(201): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(224): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-     1>Done Building Project "D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Ecc\Ecc.vcxproj" (Build target(s)) -- FAILED.
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(203): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(242): warning C4244: 'argument': conversion from 'double' to 'ELEM_TYPE', possible loss of data
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(244): warning C4244: 'argument': conversion from 'double' to 'ELEM_TYPE', possible loss of data
+       Link:
+         D:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.lib" /MACHINE:X86 Debug\main.obj
+         LINK : D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe not found or not built by the last incremental link; performing full link
+         Ecc.vcxproj -> D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe
+     1>Done Building Project "D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Ecc\Ecc.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:01.95
+Time Elapsed 00:00:02.30
