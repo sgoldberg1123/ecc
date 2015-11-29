@@ -135,10 +135,17 @@ InfInt pointDoubler(InfInt x, InfInt y, char call) {
 /*
  * Given component y, get x;
  */
-double getX(int y) {
+InfInt getX(InfInt y) {
 
-	double x;
-	x = 0;
+	InfInt u,v,w,x;
+	//MAY NEED TO DO SOME OVERLOADING FOR POW FUNCTION
+	u = (InfInt)pow(((InfInt)9 * (y*y) + ((InfInt)3).InfInt::intSqrt()*((InfInt)27 * (y*y*y*y)
+		- (InfInt)1296 * (y*y) + 15556).InfInt::intSqrt() - 216), (1 / 3));
+	v = ((InfInt)pow(2, (1 / 3))*(InfInt)pow(3, (2 / 3)));
+	w = (InfInt)pow((2 / 3), (1 / 3));
+
+	x = (u / v) - (w / u);
+
 	return x;
 }
 
