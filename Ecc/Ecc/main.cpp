@@ -26,16 +26,28 @@ InfInt getY(InfInt x);
 #define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
-
+	//our specific prime number
 	InfInt p = "1267650600228229401496703205653";
-	InfInt x3, y3;
-	InfInt x1 = 5, y1 = 4, x2 = 7, y2 = 12;
-	char xComponent = 'x', yComponent = 'y';
-
+	
 	//create the seed we need for "true" random x's
 	srand(time(NULL));
 
-	//TEST PROMPT for getting a random point
+	//variables need for trials
+	int x;
+
+	//PROMPT and PROCESS------------------------------------------------------------------
+	cout << ("Welcome to our project on Elliptic Curve Cryptography!\n\nBelow we will operate a series of functions ")
+		 << ("which will perform operations on our curve: Y^2 = x^3 + x + 24") << endl
+		 << ("with our prime being: ") << p << endl;
+
+	cout << ("A demonstration of our following functions will proceed...\n\n")
+		 << ("Given a random 'x', on our curve we will find our 'y' for said point utilizing our getY() function\n")
+		 << ("Here is our random x: ") << 
+
+	
+
+	//RANDOM POINT TEST-------------------------------------------------------------------
+	/*
 	int x = rand();
 	cout << ("Given x: ") << (x) << endl <<endl;
 	InfInt y;
@@ -44,9 +56,13 @@ int main() {
 
 		y = getPoint(x);
 		cout << ("Our point is: (") << (x) << (",") << (y) << (")") << endl;
-
+	/*
 	//POINT ADDER TEST-------------------------------------------------------------------
-	/*	cout << endl << endl << ("POINT ADDER TEST") << endl;
+	/*	
+		InfInt x3, y3;
+		InfInt x1 = 5, y1 = 4, x2 = 7, y2 = 12;
+		char xComponent = 'x', yComponent = 'y';
+		cout << endl << endl << ("POINT ADDER TEST") << endl;
 		x3 = pointAdder(x1, y1, x2, y2, xComponent);
 		y3 = pointAdder(x1, y1, x2, y2, yComponent);
 
@@ -54,10 +70,10 @@ int main() {
 	*/
 
 	//getY() TEST------------------------------------------------------------------------
-	/*InfInt testX = 4, w;
-	w = getY(testX);
-
-	cout << ("OUR NEW POINT: ") << (testX) << (",") << (w) << endl;
+	/*
+		InfInt testX = 4, w;
+		w = getY(testX);
+		cout << ("OUR NEW POINT: ") << (testX) << (",") << (w) << endl;
 	*/
 
 	//cout << (255 - (pow(2, 7)));
