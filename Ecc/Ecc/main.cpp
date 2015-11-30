@@ -19,10 +19,12 @@
 
 using namespace std;
 
+InfInt prime = "1267650600228229401496703205653";
 int fastExponentiation(int mPlier, int g);
 InfInt getPoint(int x);
 InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component);
 InfInt getY(InfInt x);
+InfInt getGenerator(char c);
 #define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
@@ -94,40 +96,45 @@ int main() {
 /*
  * Function to run all operations for Diffie-Hellman's Elliptic Curve cryptography simulation
 */
-int dhecc(/**/) {
+InfInt dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
 
 	////this may be wrong as is, I believe I must change it such that 
 	////g is different? Must research.
 
 	////Bob and Sarah each have g,(a value on the curve?), and their own key, K and L respectively. //?
-	/** InfInt g = getGenerater(); //?
-	 *  Int kk = rand();//?
-	 *  Int ll = rand();//?
-	 */
+	InfInt gX = getGenerator('x'); //?
+	InfInt gY = getGenerator('y'); //?
+	int kk = rand() % 255;//?
+	cout << "k = " << kk << endl;
+	int ll = rand() % 255;//?
+	cout << "l = " << ll << endl;
+
 	////Bob is trying to send Sarah lesser encryption key, M
 	int m = 8;
+	cout << "Secret Encryption key to be shared is:  " << m << endl;
 
 	////Bob sends Sarah Kg, and Sarah sends back Lg
-	//Infint gK = kk * g; //These'll probably use Fast exponentiation
-	//InfInt gL = ll * g; //These'll probably use Fast exponentiation
+	InfInt gKX, gKY = fastExponentiation(kk, gX, gY); // Careful about this
+													  //Fast Expont?
+	InfInt gLX, gLY = fastExponentiation(ll, gX, gY);
 
 	////Bob multiplies (K)Lg and Sarah multiplies (L)Kg
-	//InfInt gKL = gL * kk; //These'll probably use Fast exponentiation
-	//InfInt gLK = gK * ll; //These'll probably use Fast exponentiation
+	InfInt gKLX, gKLY = fastExponentiation(kk, gKX, gKY); //These names will get confusing quick.
+	InfInt gLKX, gLKY = fastExponentiation(kk, gLX, gLY);
 
 	////Bob then adds M + KLg and sends it to Sarah
-	//InfInt gKLm = m + gKL;
+	InfInt gKLm = gKLX + m; //this is only the x value of gKL for now, point multiplication is wierd.
 
-	////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
-	//int n = gKLm - gLK;
-	int n = 0;
+							////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
+	InfInt n = gKLm - gLKX;
 	////Sarah now has encryotion key M, and an onlooker, say Sneaks McGeeks,
 	////only has knowledge of Kg, Lg, and M+KLg which cannot be easily used to
 	////solve the encryption.
-	
+
 	return n;
 }
+
 
 /*
  * Equation used to double a point with the given components.
@@ -228,16 +235,25 @@ InfInt getPoint(int x) {
 	long long y = xx;
 	return InfInt(y);
 }
-int getGenerator() {
+InfInt getGenerator(char c) {
 	//Generate a point that generates the curve.
 	////Does any point work? If not, what qualities does
 	////the point need?
+	InfInt x = 12;
+	InfInt y = 24;
+	if (c == 'x') {
+		return x;
+	}
+	else if (c == 'y') {
+		return y;
+	}
 	return 0;
 }
 
+
 /*
- * Application of fast exponentiation in order to multiply a very big number very quickly
- */
+* Application of fast exponentiation in order to multiply a very big number very quickly
+*/
 InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 
 	int nn = mPlier;
@@ -267,9 +283,9 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 			//is like: gX^cc + gX^cc + ...
 			//needs : cc*g + cc*g+...
 			resultX = resultX + (gX * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
-			//resultX = resultX % prime;
+														   //resultX = resultX % prime;
 			resultY = resultY + (gY * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
-			//resultY = resultY % prime;
+														   //resultY = resultY % prime;
 		}
 		else if (bin.at(ii) == '0') {
 			//cout << "zero/" << endl;
@@ -283,9 +299,11 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 }
 
 void curve() {//maybe turn this into a funtion that given input returns x, y, a, b, etc?
-	//Y^2 = x^3 + x + 24 under prime P = 1267650600228229401496703205653
-	//P = 1267650600228229401496703205653
+		//Y^2 = x^3 + x + 24 under prime P = 1267650600228229401496703205653
+		//P = 1267650600228229401496703205653
+		//Order of curve (according to Sage Math): 1267650600228228129735869379373;
 }
+
 
 
 
