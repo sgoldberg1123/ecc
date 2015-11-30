@@ -162,7 +162,7 @@ InfInt dhecc(/**/) {
 /*
  * Equation used to double a point with the given components.
  */
-InfInt pointDoubler(InfInt x, InfInt y, char call) {
+InfInt pointDoubler(InfInt x, InfInt y, char call) {//11/30-SamGo-modify this to allow a point to be doubled n times? Also maybe to return a InfInt Array?
 
 	InfInt l = 0; //Lambda
 	int a = 24; //?
@@ -183,6 +183,11 @@ InfInt pointDoubler(InfInt x, InfInt y, char call) {
 	else {
 		return 0;
 	}
+
+
+	//How to handle multiplication by even 'n'
+	//Break even into a power of 2, n = 2^m
+	//Perform function, repeat m times
 }
 
 /*
@@ -242,7 +247,7 @@ InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component) {
 /*
  * Given our x obtain our point on the curve
 */
-InfInt getPoint(int x) {
+InfInt getPoint(int x) { //11/30 - SamGo - Maybe either change this to be able to return 'true' y values(to a point) or ?
 
 	double xx = pow(x, 3) + x + 24;
 	xx = sqrt(xx);
@@ -259,9 +264,7 @@ InfInt getPoint(int x) {
 	return InfInt(y);
 }
 InfInt getGenerator(char c) {
-	//Generate a point that generates the curve.
-	////Does any point work? If not, what qualities does
-	////the point need?
+	//Returns a point that generates the curve.
 	InfInt x = 12;
 	InfInt y = 42;
 	if (c == 'x') {
@@ -296,19 +299,47 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 	int ii = 0;
 	InfInt resultX;
 	InfInt resultY;
+	InfInt resArray[2];
+	resArray[0] = 0; // Double check that 0-1 is ok, instead of 1-2
+	resArray[1] = 0;
 
 	for (cc;cc > 0;cc--) {
 		if (bin.at(ii) == '1') {
 			//cout << cc << endl;
 			//Multiply g by 2^(c-1), add to result.
 
-			//This is technically the slow version of point adding, 
-			//is like: gX^cc + gX^cc + ...
-			//needs : cc*g + cc*g+...
-			resultX = resultX + (gX * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
+			//This is technically Scalar multiplication?
+			//resultX = resultX + (gX * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
 														   //resultX = resultX % prime;
-			resultY = resultY + (gY * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
+			//resultY = resultY + (gY * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
 														   //resultY = resultY % prime;
+			InfInt tempX = gX;
+			InfInt tempY = gY;
+			int pp = cc-1;
+			////Point multiplication below
+			//if power at index ii(starts as left most digit and moves right) is a 1,  
+			//call pointDoubler (cc-1) times, calling tempX/Y, when finished, add to resArray using pointAdder
+			for (pp; pp > 0;pp--) {
+				InfInt ttX = tempX; //This is kinda weird, but nessesary given the weird way we return values.
+				InfInt ttY = tempY;
+				tempX = pointDoubler(ttX,ttY, 'x'); //temp contains 2g, ect
+				tempY = pointDoubler(ttX,ttY, 'y');
+			} //at the end of this loop, tempX/Y = n*g
+			
+			//Add result to resArray
+			InfInt tttX = resArray[0];
+			InfInt tttY = resArray[1];
+			resArray[0] = pointAdder(tttX, tttY, tempX, tempY, 'x');
+			resArray[1] = pointAdder(tttX, tttY, tempX, tempY, 'y');
+			//
+			//
+			//How to handle multiplication by even 'n'
+			//Break even into a power of 2, n = 2^m
+			//Perform function, repeat m times
+			//Note: in this loop/if, cc-1 = power of 2 (check if cc-1 or cc)
+//Remaining:: Make sure that if mPliers is odd, a 1g is added at the end
+//This may already happen as a result of how the loop works, but make sure.
+			
 		}
 		else if (bin.at(ii) == '0') {
 			//cout << "zero/" << endl;
@@ -318,7 +349,7 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 		ii++;
 	}
 
-	return resultX, resultY; //How return point?
+	return resArray[0], resArray[1]; //How return point?
 }
 
 void curve() {//maybe turn this into a funtion that given input returns x, y, a, b, etc?
