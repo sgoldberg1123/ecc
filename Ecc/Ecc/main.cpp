@@ -20,7 +20,7 @@
 using namespace std;
 
 InfInt prime = "1267650600228229401496703205653";
-int fastExponentiation(int mPlier, int g);
+InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY);
 InfInt getPoint(int x);
 InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component);
 InfInt getY(InfInt x);
@@ -35,18 +35,41 @@ int main() {
 	srand(time(NULL));
 
 	//variables need for trials
-	int x;
+	InfInt x = rand();
+	InfInt y, addedX, addedY;
+	InfInt x1 = "123456789123456789123456789", y1 = "123456789123456789123456789", 
+		   x2 ="987654321987654321987654321", y2 ="987654321987654321987654321";
 
 	//PROMPT and PROCESS------------------------------------------------------------------
 	cout << ("Welcome to our project on Elliptic Curve Cryptography!\n\nBelow we will operate a series of functions ")
-		 << ("which will perform operations on our curve: Y^2 = x^3 + x + 24") << endl
-		 << ("with our prime being: ") << p << endl;
+		<< ("which will perform operations on our curve: Y^2 = x^3 + x + 24") << endl
+		<< ("with our prime being: ") << p << endl << ("A demonstration of our following functions will proceed...\n\n");
 
-	cout << ("A demonstration of our following functions will proceed...\n\n")
-		<< ("Given a random 'x', on our curve we will find our 'y' for said point utilizing our getY() function\n")
+	cout << ("--------------------------------------------------------------------------------")
+		<< ("Given a random 'x', on our curve we will find our 'y' for said point utilizing \nour getY() function\n")
 		<< ("Here is our random x: ") << x << endl;
-
 	
+	cout << ("Now we will complete our point on our elliptic curve \nby passing in our 'x' coordinate and getting our 'y'") << endl << endl;
+	y = getY(x);
+	cout << ("getY(x) = ") << y << endl << ("Therefore our point is (") << x << (",") << y << (")") << endl << endl
+		 << ("--------------------------------------------------------------------------------");
+
+	cout << ("We have also developed our own point adder which will take our mock points and  add them together") << endl;
+	cout << ("Our first point being \n(x1,y1) = (123456789123456789123456789, 123456789123456789123456789)\n")
+		<< ("and our second point being \n(x2, y2) = (987654321987654321987654321,987654321987654321987654321)") << endl << endl;
+	
+	addedX = pointAdder(x1, y1, x2, y2, 'x');
+	addedY = pointAdder(x1, y1, x2, y2, 'y');
+
+	cout << ("Our new point is: ") << ("(") << addedX << (",") << addedY << (")") << endl
+		<< ("--------------------------------------------------------------------------------");
+
+	cout << ("We have discovered a generator for our curve to be x = 12 and y = 42 which we use for our following DHECC example") << endl
+		<< ("--------------------------------------------------------------------------------");
+
+	//FAST EXPONENTIATION EXAMPLE HERE
+	
+	//DHECC EXAMPLE HERE
 
 	//RANDOM POINT TEST-------------------------------------------------------------------
 	/*
@@ -240,7 +263,7 @@ InfInt getGenerator(char c) {
 	////Does any point work? If not, what qualities does
 	////the point need?
 	InfInt x = 12;
-	InfInt y = 24;
+	InfInt y = 42;
 	if (c == 'x') {
 		return x;
 	}
