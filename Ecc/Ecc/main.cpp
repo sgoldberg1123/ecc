@@ -41,8 +41,8 @@ int main() {
 		 << ("with our prime being: ") << p << endl;
 
 	cout << ("A demonstration of our following functions will proceed...\n\n")
-		 << ("Given a random 'x', on our curve we will find our 'y' for said point utilizing our getY() function\n")
-		 << ("Here is our random x: ") << 
+		<< ("Given a random 'x', on our curve we will find our 'y' for said point utilizing our getY() function\n")
+		<< ("Here is our random x: ") << x << endl;
 
 	
 
