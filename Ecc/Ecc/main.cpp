@@ -127,19 +127,26 @@ int main() {
 ttmath::Big<1,2> dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
 
+	cout << "This function, DHECC, emulates Diffy-Helman Elliptic Curve Cartography by using an elliptic curve to send a private key from Bob to Sarah." << endl;
 
-	////Bob and Sarah each have g, a generator of our curve, and their own private value, K and L respectively. //?
+
+	////Bob and Sarah each have g, a generator of our curve, and their own private value, K and L respectively.
+	cout << "Bob and Sarah each have g, a generator of our curve, and their own private value, K and L respectively." << endl;
 	ttmath::Big<1,2> gX = getGenerator('x'); //?
 	ttmath::Big<1,2> gY = getGenerator('y'); //?
 	int kk = rand() % 255;//?
 	cout << "k = " << kk << endl;
 	int ll = rand() % 255;//?
 	cout << "l = " << ll << endl;
+	cout << "For this instance, K = " << kk << ", and L = " << ll << "." << endl;
 
 	////Bob is trying to send Sarah lesser encryption key, M
 	int m = 8;
+	cout << "Please enter a integer to be used as the Private key Bob is sharing with Sarah.";
+	cin >> m;
 	cout << "Secret Encryption key to be shared is:  " << m << endl;
 
+	cout << "To start, Bob multiplies g by K, and sends it to Sarah. Sarah does likewise with g and L." << endl;
 	////Bob sends Sarah Kg, and Sarah sends back Lg
 	ttmath::Big<1, 2> gKX = fastExponentiation(kk, gX, gY, 'x');
 	ttmath::Big<1, 2> gKY = fastExponentiation(kk, gX, gY, 'y');
@@ -147,6 +154,11 @@ ttmath::Big<1,2> dhecc(/**/) {
 	ttmath::Big<1, 2> gLX = fastExponentiation(ll, gX, gY, 'x');
 	ttmath::Big<1, 2> gLY = fastExponentiation(ll, gX, gY, 'y');
 
+	cout << "gK = " << gKX << ", " << gKY << endl;
+	cout << "gL = " << gLX << ", " << gLY << endl;
+
+
+	cout << "Next, Bob multiplies (K)Lg and Sarah multiplies (L)Kg" << endl;
 	////Bob multiplies (K)Lg and Sarah multiplies (L)Kg
 	ttmath::Big<1, 2> gKLX = fastExponentiation(ll, gKX, gKY, 'x');
 	ttmath::Big<1, 2> gKLY = fastExponentiation(ll, gKX, gKY, 'y');
@@ -154,9 +166,14 @@ ttmath::Big<1,2> dhecc(/**/) {
 	ttmath::Big<1, 2> gLKX = fastExponentiation(kk, gLX, gLY, 'x');
 	ttmath::Big<1, 2> gLKY = fastExponentiation(kk, gLX, gLY, 'y');
 
+	cout << "gKL = " << gKLX << ", " << gKLY << endl;
+	cout << "gLK = " << gLKX << ", " << gLKY << endl;
+
+	cout << "Bob then adds M + KLg and sends it to Sarah" << endl;
 	////Bob then adds M + KLg and sends it to Sarah
-	ttmath::Big<1, 2> gKLm = gKLX + m; //this is only the x value of gKL for now, point multiplication is wierd.
-	
+	ttmath::Big<1, 2> gKLXm = gKLX + m; 
+	ttmath::Big<1, 2> gKLYm = gKLY + m;
+	cout << "gKL + M = " << gKLXm << ", " << gKLYm << endl;
 	
 	/*ttmath::Big<1, 2> gLKm = gLKX + m;
 	cout << endl;
@@ -165,8 +182,9 @@ ttmath::Big<1,2> dhecc(/**/) {
 	cout << endl;
 	cout << "gLKX = " << gLKX;*/
 
+	cout << "After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M" << endl;
 	////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
-	ttmath::Big<1,2> n = gKLm - gLKX;
+	ttmath::Big<1,2> n = gKLXm - gLKX;
 
 	//Small rounding Algorithm
 	ttmath::Big<1, 2> oneone = 1;
@@ -177,7 +195,7 @@ ttmath::Big<1,2> dhecc(/**/) {
 	////only has knowledge of Kg, Lg, and M+KLg which cannot be easily used to
 	////solve the encryption.
 	cout << endl;
-	cout << n;
+	cout << "And so the Private key Bob sent to Sarah should be: " << n ;
 	return n;
 }
 
