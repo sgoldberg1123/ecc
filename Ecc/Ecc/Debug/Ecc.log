@@ -1,19 +1,17 @@
-﻿Build started 11/29/2015 11:07:18 PM.
+﻿Build started 11/30/2015 6:04:17 PM.
      1>Project "D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Ecc\Ecc.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Visual Studio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(28): warning C4005: 'RAND_MAX': macro redefinition
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(31): warning C4005: 'RAND_MAX': macro redefinition
          c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdlib.h(339): note: see previous definition of 'RAND_MAX'
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(35): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(255): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(305): warning C4244: 'argument': conversion from 'double' to 'ELEM_TYPE', possible loss of data
-     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(307): warning C4244: 'argument': conversion from 'double' to 'ELEM_TYPE', possible loss of data
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(45): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>d:\student data\documents\githubvisualstudio\ecc\ecc\ecc\main.cpp(278): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
        Link:
-         D:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.lib" /MACHINE:X86 Debug\main.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.lib" /MACHINE:X86 Debug\main.obj
          Ecc.vcxproj -> D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Debug\Ecc.exe
      1>Done Building Project "D:\Student Data\Documents\GitHubVisualStudio\ecc\Ecc\Ecc\Ecc.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.58
+Time Elapsed 00:00:02.39

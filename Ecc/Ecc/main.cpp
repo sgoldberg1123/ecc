@@ -15,29 +15,39 @@
 #include <iomanip>
 #include <cmath>
 #include <stack>
-#include "Infint.h"
+#include "InfInt.h"
+#include "ttmath.h"
 
 using namespace std;
 
-InfInt prime = "1267650600228229401496703205653";
-InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY);
-InfInt getPoint(int x);
-InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component);
-InfInt getY(InfInt x);
-InfInt getGenerator(char c);
+
+ttmath::Big<1,2> prime = "1267650600228229401496703205653";
+ttmath::Big<1,2> fastExponentiation(int mPlier, ttmath::Big<1,2> gX, ttmath::Big<1,2> gY, char cVar);
+ttmath::Big<1,2> getPoint(int x);
+ttmath::Big<1,2> pointAdder(ttmath::Big<1,2> x1, ttmath::Big<1,2> y1, ttmath::Big<1,2> x2, ttmath::Big<1,2> y2, char component);
+ttmath::Big<1,2> getY(ttmath::Big<1,2> x);
+ttmath::Big<1,2> getGenerator(char c);
+ttmath::Big<1,2> pointDoubler(ttmath::Big<1,2> x, ttmath::Big<1,2> y, char call);
 #define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
 	//our specific prime number
-	InfInt p = "1267650600228229401496703205653";
-	
+	ttmath::Big<1,2> p = "1267650600228229401496703205653";
+
+	cout << "2g is :";
+	cout << fastExponentiation(2, getGenerator('x'), getGenerator('y'), 'x') << ", " << fastExponentiation(2, getGenerator('x'), getGenerator('y'), 'y');
+	cout << endl;
+	cout << "2g is :";
+	cout << pointDoubler(getGenerator('x'), getGenerator('y'), 'x') << ", " << pointDoubler(getGenerator('x'), getGenerator('y'), 'y');
+	cout << endl;
+
 	//create the seed we need for "true" random x's
 	srand(time(NULL));
 
 	//variables need for trials
-	InfInt x = rand();
-	InfInt y, addedX, addedY;
-	InfInt x1 = "123456789123456789123456789", y1 = "123456789123456789123456789", 
+	ttmath::Big<1,2> x = rand();
+	ttmath::Big<1,2> y, addedX, addedY;
+	ttmath::Big<1,2> x1 = "123456789123456789123456789", y1 = "123456789123456789123456789", 
 		   x2 ="987654321987654321987654321", y2 ="987654321987654321987654321";
 
 	//PROMPT and PROCESS------------------------------------------------------------------
@@ -75,7 +85,7 @@ int main() {
 	/*
 	int x = rand();
 	cout << ("Given x: ") << (x) << endl <<endl;
-	InfInt y;
+	ttmath::Big<1,2> y;
 	
 	//TEST to get an exact point, not a decimal value
 
@@ -84,8 +94,8 @@ int main() {
 	/*
 	//POINT ADDER TEST-------------------------------------------------------------------
 	/*	
-		InfInt x3, y3;
-		InfInt x1 = 5, y1 = 4, x2 = 7, y2 = 12;
+		ttmath::Big<1,2> x3, y3;
+		ttmath::Big<1,2> x1 = 5, y1 = 4, x2 = 7, y2 = 12;
 		char xComponent = 'x', yComponent = 'y';
 		cout << endl << endl << ("POINT ADDER TEST") << endl;
 		x3 = pointAdder(x1, y1, x2, y2, xComponent);
@@ -96,7 +106,7 @@ int main() {
 
 	//getY() TEST------------------------------------------------------------------------
 	/*
-		InfInt testX = 4, w;
+		ttmath::Big<1,2> testX = 4, w;
 		w = getY(testX);
 		cout << ("OUR NEW POINT: ") << (testX) << (",") << (w) << endl;
 	*/
@@ -119,15 +129,15 @@ int main() {
 /*
  * Function to run all operations for Diffie-Hellman's Elliptic Curve cryptography simulation
 */
-InfInt dhecc(/**/) {
+ttmath::Big<1,2> dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
 
 	////this may be wrong as is, I believe I must change it such that 
 	////g is different? Must research.
 
 	////Bob and Sarah each have g,(a value on the curve?), and their own key, K and L respectively. //?
-	InfInt gX = getGenerator('x'); //?
-	InfInt gY = getGenerator('y'); //?
+	ttmath::Big<1,2> gX = getGenerator('x'); //?
+	ttmath::Big<1,2> gY = getGenerator('y'); //?
 	int kk = rand() % 255;//?
 	cout << "k = " << kk << endl;
 	int ll = rand() % 255;//?
@@ -138,47 +148,50 @@ InfInt dhecc(/**/) {
 	cout << "Secret Encryption key to be shared is:  " << m << endl;
 
 	////Bob sends Sarah Kg, and Sarah sends back Lg
-	InfInt gKX, gKY = fastExponentiation(kk, gX, gY); // Careful about this
-													  //Fast Expont?
-	InfInt gLX, gLY = fastExponentiation(ll, gX, gY);
+	//ttmath::Big<1,2> gKX = fastExponentiation(kk, gX, gY, 'x');
+	//ttmath::Big<1,2> gKY = fastExponentiation(kk, gX, gY, 'y');
+
+	//ttmath::Big<1,2> gLX = fastExponentiation(ll, gX, gY, 'x');
+	//ttmath::Big<1,2> gLY = fastExponentiation(ll, gX, gY, 'y');
 
 	////Bob multiplies (K)Lg and Sarah multiplies (L)Kg
-	InfInt gKLX, gKLY = fastExponentiation(kk, gKX, gKY); //These names will get confusing quick.
-	InfInt gLKX, gLKY = fastExponentiation(kk, gLX, gLY);
+	//ttmath::Big<1,2> gKLX = fastExponentiation(kk, gKX, gKY, 'x'); 
+	//ttmath::Big<1,2> gKLY = fastExponentiation(kk, gKX, gKY, 'y'); //These names will get confusing quick.
+	//ttmath::Big<1,2> gLKX, gLKY = fastExponentiation(kk, gLX, gLY);
 
 	////Bob then adds M + KLg and sends it to Sarah
-	InfInt gKLm = gKLX + m; //this is only the x value of gKL for now, point multiplication is wierd.
+	//ttmath::Big<1,2> gKLm = gKLX + m; //this is only the x value of gKL for now, point multiplication is wierd.
 
 							////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
-	InfInt n = gKLm - gLKX;
+	//ttmath::Big<1,2> n = gKLm - gLKX;
 	////Sarah now has encryotion key M, and an onlooker, say Sneaks McGeeks,
 	////only has knowledge of Kg, Lg, and M+KLg which cannot be easily used to
 	////solve the encryption.
 
-	return n;
+	return 0;//n;
 }
 
 
 /*
  * Equation used to double a point with the given components.
  */
-InfInt pointDoubler(InfInt x, InfInt y, char call) {//11/30-SamGo-modify this to allow a point to be doubled n times? Also maybe to return a InfInt Array?
+ttmath::Big<1,2> pointDoubler(ttmath::Big<1,2> x, ttmath::Big<1,2> y, char call) {//11/30-SamGo-modify this to allow a point to be doubled n times? Also maybe to return a ttmath::Big<1,2> Array?
 
-	InfInt l = 0; //Lambda
-	int a = 24; //?
+	ttmath::Big<1,2> l = 0; //Lambda
+	int a = 1; //?
 	
 	//Lambda = 3x(p)^2+a/2y(p)
 	l = (((x*x)*3 )+ a) / (y*2);
-	//X(r)=Lambda^2 + x(p)
-	InfInt xd = (l*l) + x;
+	//X(r)=Lambda^2 - 2x(p)
+	ttmath::Big<1,2> xd = (l*l) - (x*2); //
 	//Y(r)=Lambda[x(p)]-y(p)
-	InfInt yd = (l*x) - y;
+	ttmath::Big<1,2> yd = (l*(x - xd)) - y;
 
 	if (call == 'x') { // if error try = //?
-		return xd;
+		return ttmath::Mod(xd,prime);
 	}
 	else if (call == 'y') { // if error try = //?
-		return yd;
+		return ttmath::Mod(yd,prime);
 	}
 	else {
 		return 0;
@@ -194,14 +207,14 @@ InfInt pointDoubler(InfInt x, InfInt y, char call) {//11/30-SamGo-modify this to
  * Given component y, get x;
  */
 /*
-InfInt getX(InfInt y) {
+ttmath::Big<1,2> getX(ttmath::Big<1,2> y) {
 
-	InfInt u,v,w,x;
+	ttmath::Big<1,2> u,v,w,x;
 	//MAY NEED TO DO SOME OVERLOADING FOR POW FUNCTION
-	u = (InfInt)pow(((InfInt)9 * (y*y) + ((InfInt)3).InfInt::intSqrt()*((InfInt)27 * (y*y*y*y)
-		- (InfInt)1296 * (y*y) + 15556).InfInt::intSqrt() - 216), (1 / 3));
-	v = ((InfInt)pow(2, (1 / 3))*(InfInt)pow(3, (2 / 3)));
-	w = (InfInt)pow((2 / 3), (1 / 3));
+	u = (ttmath::Big<1,2>)pow(((ttmath::Big<1,2>)9 * (y*y) + ((ttmath::Big<1,2>)3).ttmath::Big<1,2>::intSqrt()*((ttmath::Big<1,2>)27 * (y*y*y*y)
+		- (ttmath::Big<1,2>)1296 * (y*y) + 15556).ttmath::Big<1,2>::intSqrt() - 216), (1 / 3));
+	v = ((ttmath::Big<1,2>)pow(2, (1 / 3))*(ttmath::Big<1,2>)pow(3, (2 / 3)));
+	w = (ttmath::Big<1,2>)pow((2 / 3), (1 / 3));
 
 	x = (u / v) - (w / u);
 
@@ -212,13 +225,13 @@ InfInt getX(InfInt y) {
 /*
  * Given component x, get y;
  */
-InfInt getY(InfInt x) {
+ttmath::Big<1,2> getY(ttmath::Big<1,2> x) {
 
-	InfInt y;
+	ttmath::Big<1,2> y;
 
 	y = (x*x*x) + x + 24;
 
-	y = y.InfInt::intSqrt();
+	y = ttmath::Sqrt(y);
 
 	return y;
 }
@@ -226,11 +239,13 @@ InfInt getY(InfInt x) {
 /* 
  * Adds two points together component wise to get a new component for given point
  */
-InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component) {
-	InfInt x3, y3;
+ttmath::Big<1,2> pointAdder(ttmath::Big<1,2> x1, ttmath::Big<1,2> y1, ttmath::Big<1,2> x2, ttmath::Big<1,2> y2, char component) {
+	ttmath::Big<1,2> x3, y3;
 
-	x3 = x1 + x2;
-	y3 = y1 + y2;
+	//Lambda
+	ttmath::Big<1,2> lambda = (y2-y1)/(x2-x1);
+	x3 = (lambda*lambda)-x1-x2;
+	y3 = (lambda*(x1-x3))-y1;
 
 	if (component == 'x') {
 		return x3;
@@ -247,7 +262,7 @@ InfInt pointAdder(InfInt x1, InfInt y1, InfInt x2, InfInt y2, char component) {
 /*
  * Given our x obtain our point on the curve
 */
-InfInt getPoint(int x) { //11/30 - SamGo - Maybe either change this to be able to return 'true' y values(to a point) or ?
+ttmath::Big<1,2> getPoint(int x) { //11/30 - SamGo - Maybe either change this to be able to return 'true' y values(to a point) or ?
 
 	double xx = pow(x, 3) + x + 24;
 	xx = sqrt(xx);
@@ -259,14 +274,14 @@ InfInt getPoint(int x) { //11/30 - SamGo - Maybe either change this to be able t
 	//	cout << ("Failed!");
 	//		y = NULL;
 	//}
-	//InfInt y = xxx.InfInt::intSqrt();
+	//ttmath::Big<1,2> y = xxx.ttmath::Big<1,2>::intSqrt();
 	long long y = xx;
-	return InfInt(y);
+	return ttmath::Big<1,2>(y);
 }
-InfInt getGenerator(char c) {
+ttmath::Big<1,2> getGenerator(char c) {
 	//Returns a point that generates the curve.
-	InfInt x = 12;
-	InfInt y = 42;
+	ttmath::Big<1,2> x = 12;
+	ttmath::Big<1,2> y = 42;
 	if (c == 'x') {
 		return x;
 	}
@@ -280,7 +295,7 @@ InfInt getGenerator(char c) {
 /*
 * Application of fast exponentiation in order to multiply a very big number very quickly
 */
-InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
+ttmath::Big<1,2> fastExponentiation(int mPlier, ttmath::Big<1,2> gX, ttmath::Big<1,2> gY, char cVar) {
 
 	int nn = mPlier;
 	string bin;
@@ -297,9 +312,9 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 	//multiply g by bin
 	int cc = bin.length();
 	int ii = 0;
-	InfInt resultX;
-	InfInt resultY;
-	InfInt resArray[2];
+	ttmath::Big<1,2> resultX;
+	ttmath::Big<1,2> resultY;
+	ttmath::Big<1,2> resArray[2];
 	resArray[0] = 0; // Double check that 0-1 is ok, instead of 1-2
 	resArray[1] = 0;
 
@@ -313,33 +328,30 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 														   //resultX = resultX % prime;
 			//resultY = resultY + (gY * (pow(2, (cc - 1)))); //Replace this with a normal point multiplier?
 														   //resultY = resultY % prime;
-			InfInt tempX = gX;
-			InfInt tempY = gY;
-			int pp = cc-1;
+			ttmath::Big<1,2> tempX = gX;
+			ttmath::Big<1,2> tempY = gY;
+			int pp = cc - 1;
 			////Point multiplication below
-			//if power at index ii(starts as left most digit and moves right) is a 1,  
-			//call pointDoubler (cc-1) times, calling tempX/Y, when finished, add to resArray using pointAdder
-			for (pp; pp > 0;pp--) {
-				InfInt ttX = tempX; //This is kinda weird, but nessesary given the weird way we return values.
-				InfInt ttY = tempY;
+			
+			for (pp; pp > 0;pp--) { //does this have to be p >= 0?
+				ttmath::Big<1,2> ttX = tempX; //This is kinda weird, but nessesary given the weird way we return values.
+				ttmath::Big<1,2> ttY = tempY;
 				tempX = pointDoubler(ttX,ttY, 'x'); //temp contains 2g, ect
 				tempY = pointDoubler(ttX,ttY, 'y');
 			} //at the end of this loop, tempX/Y = n*g
 			
 			//Add result to resArray
-			InfInt tttX = resArray[0];
-			InfInt tttY = resArray[1];
+			ttmath::Big<1,2> tttX = resArray[0];
+			ttmath::Big<1,2> tttY = resArray[1];
 			resArray[0] = pointAdder(tttX, tttY, tempX, tempY, 'x');
 			resArray[1] = pointAdder(tttX, tttY, tempX, tempY, 'y');
+			
 			//
 			//
 			//How to handle multiplication by even 'n'
 			//Break even into a power of 2, n = 2^m
 			//Perform function, repeat m times
 			//Note: in this loop/if, cc-1 = power of 2 (check if cc-1 or cc)
-//Remaining:: Make sure that if mPliers is odd, a 1g is added at the end
-//This may already happen as a result of how the loop works, but make sure.
-			
 		}
 		else if (bin.at(ii) == '0') {
 			//cout << "zero/" << endl;
@@ -348,8 +360,22 @@ InfInt fastExponentiation(int mPlier, InfInt gX, InfInt gY) {
 
 		ii++;
 	}
+	ttmath::Big<1,2> ttttX = resArray[0];
+	ttmath::Big<1,2> ttttY = resArray[1];
+	if (mPlier == 1) {
+		resArray[0] = pointAdder(ttttX, ttttY, gX, gY, 'x');
+		resArray[1] = pointAdder(ttttX, ttttY, gX, gY, 'y');
+	}
 
-	return resArray[0], resArray[1]; //How return point?
+	if (cVar == 'x') {
+		return Mod(resArray[0], prime);
+	}
+	else if (cVar == 'y') {
+		return Mod(resArray[1], prime);
+	}
+	return 0;
+
+	//return resArray[0], resArray[1]; //How return point?
 }
 
 void curve() {//maybe turn this into a funtion that given input returns x, y, a, b, etc?
