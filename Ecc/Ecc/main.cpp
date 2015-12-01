@@ -28,18 +28,13 @@ ttmath::Big<1,2> pointAdder(ttmath::Big<1,2> x1, ttmath::Big<1,2> y1, ttmath::Bi
 ttmath::Big<1,2> getY(ttmath::Big<1,2> x);
 ttmath::Big<1,2> getGenerator(char c);
 ttmath::Big<1,2> pointDoubler(ttmath::Big<1,2> x, ttmath::Big<1,2> y, char call);
+ttmath::Big<1,2> dhecc();
 #define RAND_MAX = 1267650600228229401496703205653;
 
 int main() {
 	//our specific prime number
 	ttmath::Big<1,2> p = "1267650600228229401496703205653";
-
-	cout << "2g is :";
-	cout << fastExponentiation(2, getGenerator('x'), getGenerator('y'), 'x') << ", " << fastExponentiation(2, getGenerator('x'), getGenerator('y'), 'y');
-	cout << endl;
-	cout << "2g is :";
-	cout << pointDoubler(getGenerator('x'), getGenerator('y'), 'x') << ", " << pointDoubler(getGenerator('x'), getGenerator('y'), 'y');
-	cout << endl;
+	dhecc();
 
 	//create the seed we need for "true" random x's
 	srand(time(NULL));
@@ -132,10 +127,8 @@ int main() {
 ttmath::Big<1,2> dhecc(/**/) {
 	//This function is for the Diffy-Hellman Key exchange w/ ECC
 
-	////this may be wrong as is, I believe I must change it such that 
-	////g is different? Must research.
 
-	////Bob and Sarah each have g,(a value on the curve?), and their own key, K and L respectively. //?
+	////Bob and Sarah each have g, a generator of our curve, and their own private value, K and L respectively. //?
 	ttmath::Big<1,2> gX = getGenerator('x'); //?
 	ttmath::Big<1,2> gY = getGenerator('y'); //?
 	int kk = rand() % 255;//?
@@ -148,27 +141,44 @@ ttmath::Big<1,2> dhecc(/**/) {
 	cout << "Secret Encryption key to be shared is:  " << m << endl;
 
 	////Bob sends Sarah Kg, and Sarah sends back Lg
-	//ttmath::Big<1,2> gKX = fastExponentiation(kk, gX, gY, 'x');
-	//ttmath::Big<1,2> gKY = fastExponentiation(kk, gX, gY, 'y');
+	ttmath::Big<1, 2> gKX = fastExponentiation(kk, gX, gY, 'x');
+	ttmath::Big<1, 2> gKY = fastExponentiation(kk, gX, gY, 'y');
 
-	//ttmath::Big<1,2> gLX = fastExponentiation(ll, gX, gY, 'x');
-	//ttmath::Big<1,2> gLY = fastExponentiation(ll, gX, gY, 'y');
+	ttmath::Big<1, 2> gLX = fastExponentiation(ll, gX, gY, 'x');
+	ttmath::Big<1, 2> gLY = fastExponentiation(ll, gX, gY, 'y');
 
 	////Bob multiplies (K)Lg and Sarah multiplies (L)Kg
-	//ttmath::Big<1,2> gKLX = fastExponentiation(kk, gKX, gKY, 'x'); 
-	//ttmath::Big<1,2> gKLY = fastExponentiation(kk, gKX, gKY, 'y'); //These names will get confusing quick.
-	//ttmath::Big<1,2> gLKX, gLKY = fastExponentiation(kk, gLX, gLY);
+	ttmath::Big<1, 2> gKLX = fastExponentiation(ll, gKX, gKY, 'x');
+	ttmath::Big<1, 2> gKLY = fastExponentiation(ll, gKX, gKY, 'y');
+
+	ttmath::Big<1, 2> gLKX = fastExponentiation(kk, gLX, gLY, 'x');
+	ttmath::Big<1, 2> gLKY = fastExponentiation(kk, gLX, gLY, 'y');
 
 	////Bob then adds M + KLg and sends it to Sarah
-	//ttmath::Big<1,2> gKLm = gKLX + m; //this is only the x value of gKL for now, point multiplication is wierd.
+	ttmath::Big<1, 2> gKLm = gKLX + m; //this is only the x value of gKL for now, point multiplication is wierd.
+	
+	
+	/*ttmath::Big<1, 2> gLKm = gLKX + m;
+	cout << endl;
+	cout << endl;
+	cout << "gKLX = " << gKLX;
+	cout << endl;
+	cout << "gLKX = " << gLKX;*/
 
-							////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
-	//ttmath::Big<1,2> n = gKLm - gLKX;
+	////After receiving M+KLg, Sarah subtracts M+KLg-LKg to get M
+	ttmath::Big<1,2> n = gKLm - gLKX;
+
+	//Small rounding Algorithm
+	ttmath::Big<1, 2> oneone = 1;
+	ttmath::Big<1, 2> oo = n - m;
+	n = n - oo;
+
 	////Sarah now has encryotion key M, and an onlooker, say Sneaks McGeeks,
 	////only has knowledge of Kg, Lg, and M+KLg which cannot be easily used to
 	////solve the encryption.
-
-	return 0;//n;
+	cout << endl;
+	cout << n;
+	return n;
 }
 
 
@@ -183,7 +193,7 @@ ttmath::Big<1,2> pointDoubler(ttmath::Big<1,2> x, ttmath::Big<1,2> y, char call)
 	//Lambda = 3x(p)^2+a/2y(p)
 	l = (((x*x)*3 )+ a) / (y*2);
 	//X(r)=Lambda^2 - 2x(p)
-	ttmath::Big<1,2> xd = (l*l) - (x*2); //
+	ttmath::Big<1,2> xd = (l*l) - x - x; //
 	//Y(r)=Lambda[x(p)]-y(p)
 	ttmath::Big<1,2> yd = (l*(x - xd)) - y;
 
@@ -312,6 +322,7 @@ ttmath::Big<1,2> fastExponentiation(int mPlier, ttmath::Big<1,2> gX, ttmath::Big
 	//multiply g by bin
 	int cc = bin.length();
 	int ii = 0;
+	int count = 0;
 	ttmath::Big<1,2> resultX;
 	ttmath::Big<1,2> resultY;
 	ttmath::Big<1,2> resArray[2];
@@ -333,25 +344,24 @@ ttmath::Big<1,2> fastExponentiation(int mPlier, ttmath::Big<1,2> gX, ttmath::Big
 			int pp = cc - 1;
 			////Point multiplication below
 			
-			for (pp; pp > 0;pp--) { //does this have to be p >= 0?
-				ttmath::Big<1,2> ttX = tempX; //This is kinda weird, but nessesary given the weird way we return values.
+			for (pp; pp > 0;pp--) {
+				ttmath::Big<1,2> ttX = tempX; 
 				ttmath::Big<1,2> ttY = tempY;
-				tempX = pointDoubler(ttX,ttY, 'x'); //temp contains 2g, ect
+				tempX = pointDoubler(ttX,ttY, 'x');
 				tempY = pointDoubler(ttX,ttY, 'y');
-			} //at the end of this loop, tempX/Y = n*g
+			}
+			if ((mPlier == 2) || count == 0) {
+				resArray[0] = tempX;
+				resArray[1] = tempY;
+			}else if (mPlier > 2) {
+				//Add result to resArray
+				ttmath::Big<1, 2> tttX = resArray[0];
+				ttmath::Big<1, 2> tttY = resArray[1];
+				resArray[0] = pointAdder(tttX, tttY, tempX, tempY, 'x');
+				resArray[1] = pointAdder(tttX, tttY, tempX, tempY, 'y');
+			}
+			count = count + 1;
 			
-			//Add result to resArray
-			ttmath::Big<1,2> tttX = resArray[0];
-			ttmath::Big<1,2> tttY = resArray[1];
-			resArray[0] = pointAdder(tttX, tttY, tempX, tempY, 'x');
-			resArray[1] = pointAdder(tttX, tttY, tempX, tempY, 'y');
-			
-			//
-			//
-			//How to handle multiplication by even 'n'
-			//Break even into a power of 2, n = 2^m
-			//Perform function, repeat m times
-			//Note: in this loop/if, cc-1 = power of 2 (check if cc-1 or cc)
 		}
 		else if (bin.at(ii) == '0') {
 			//cout << "zero/" << endl;
